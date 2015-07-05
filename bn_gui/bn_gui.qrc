@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="bn_gui">
+    <file>metig2.jpg</file>
+    <file>tiger.jpg</file>
+  </qresource>
+</RCC>

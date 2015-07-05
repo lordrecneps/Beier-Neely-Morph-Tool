@@ -1,3 +1,6 @@
+#ifndef BEIER_NEELEY_CPP
+#define BEIER_NEELEY_CPP
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -114,7 +117,7 @@ void morph(char* src_file, char* dst_file, char* line_file, std::string out_file
 	std::cout << src.size() << " " << out.size() << endl;
 }
 
-int main()
+int manin()
 {
 	morph("../../03.jpg", "../../04.jpg", "../../lines34.txt", "../../nwf/out.jpg");
 	int dong;
@@ -122,3 +125,5 @@ int main()
 	std::cin >> dong;
 	return 0;
 }
+
+#endif

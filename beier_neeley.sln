@@ -5,6 +5,11 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "beier_neeley", "beier_neeley\beier_neeley.vcxproj", "{9D38CE04-78AC-4D5D-B8F9-566F14EFCE8B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bn_gui", "bn_gui\bn_gui.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D38CE04-78AC-4D5D-B8F9-566F14EFCE8B} = {9D38CE04-78AC-4D5D-B8F9-566F14EFCE8B}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,8 +26,17 @@ Global
 		{9D38CE04-78AC-4D5D-B8F9-566F14EFCE8B}.Release|Win32.Build.0 = Release|Win32
 		{9D38CE04-78AC-4D5D-B8F9-566F14EFCE8B}.Release|x64.ActiveCfg = Release|x64
 		{9D38CE04-78AC-4D5D-B8F9-566F14EFCE8B}.Release|x64.Build.0 = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = msvc2013
 	EndGlobalSection
 EndGlobal
