@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1624</width>
-         <height>783</height>
+         <width>1043</width>
+         <height>583</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -39,10 +39,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="bn_gui.qrc">:/bn_gui/metig2.jpg</pixmap>
+           <string>File -&gt; Open first image</string>
           </property>
           <property name="scaledContents">
            <bool>false</bool>
@@ -58,10 +55,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="bn_gui.qrc">:/bn_gui/tiger.jpg</pixmap>
+           <string>File -&gt; Open second image</string>
           </property>
           <property name="scaledContents">
            <bool>false</bool>
@@ -374,6 +368,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>bn_guiClass</receiver>
+   <slot>start_morph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>805</x>
+     <y>646</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>open_first()</slot>
@@ -384,5 +394,6 @@
   <slot>second_image_clicked(QPoint)</slot>
   <slot>load_lines()</slot>
   <slot>add_line()</slot>
+  <slot>start_morph()</slot>
  </slots>
 </ui>

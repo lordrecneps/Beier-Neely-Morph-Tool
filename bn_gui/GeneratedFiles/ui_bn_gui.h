@@ -94,7 +94,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1624, 783));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1043, 583));
         horizontalLayout_2 = new QHBoxLayout(scrollAreaWidgetContents);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -106,7 +106,6 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(first_pic->sizePolicy().hasHeightForWidth());
         first_pic->setSizePolicy(sizePolicy);
-        first_pic->setPixmap(QPixmap(QString::fromUtf8(":/bn_gui/metig2.jpg")));
         first_pic->setScaledContents(false);
 
         horizontalLayout_2->addWidget(first_pic);
@@ -115,7 +114,6 @@ public:
         second_pic->setObjectName(QStringLiteral("second_pic"));
         sizePolicy.setHeightForWidth(second_pic->sizePolicy().hasHeightForWidth());
         second_pic->setSizePolicy(sizePolicy);
-        second_pic->setPixmap(QPixmap(QString::fromUtf8(":/bn_gui/tiger.jpg")));
         second_pic->setScaledContents(false);
 
         horizontalLayout_2->addWidget(second_pic);
@@ -219,6 +217,7 @@ public:
         QObject::connect(actionOpen_Line_File, SIGNAL(triggered()), bn_guiClass, SLOT(load_lines()));
         QObject::connect(second_pic, SIGNAL(clicked(QPoint)), bn_guiClass, SLOT(second_image_clicked(QPoint)));
         QObject::connect(pushButton, SIGNAL(clicked()), bn_guiClass, SLOT(add_line()));
+        QObject::connect(pushButton_2, SIGNAL(clicked()), bn_guiClass, SLOT(start_morph()));
 
         QMetaObject::connectSlotsByName(bn_guiClass);
     } // setupUi
@@ -232,8 +231,8 @@ public:
         actionReadme->setText(QApplication::translate("bn_guiClass", "Readme", 0));
         actionAbout->setText(QApplication::translate("bn_guiClass", "About", 0));
         actionOpen_Line_File->setText(QApplication::translate("bn_guiClass", "Open Line File", 0));
-        first_pic->setText(QString());
-        second_pic->setText(QString());
+        first_pic->setText(QApplication::translate("bn_guiClass", "File -> Open first image", 0));
+        second_pic->setText(QApplication::translate("bn_guiClass", "File -> Open second image", 0));
         label_3->setText(QApplication::translate("bn_guiClass", "Frames:", 0));
         pushButton->setText(QApplication::translate("bn_guiClass", "Add Line", 0));
         pushButton_3->setText(QApplication::translate("bn_guiClass", "Remove Line", 0));

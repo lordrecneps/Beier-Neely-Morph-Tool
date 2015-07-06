@@ -11,7 +11,7 @@ using namespace std;
 
 
 
-void morph(char* src_file, char* dst_file, char* line_file, std::string out_file)
+void morph(const std::string& src_file, const std::string& dst_file, const bn::LinePairs& lines, const std::string& out_file, double frames)
 {
 	Mat src, dst, mid1, mid2, out;
 	Mat map_x1, map_y1, map_x2, map_y2;
@@ -36,9 +36,6 @@ void morph(char* src_file, char* dst_file, char* line_file, std::string out_file
 		exit(-1);
 	}
 
-	bn::LinePairs lines(line_file);
-
-	double frames = 20;
 	int dot_pos = out_file.find_last_of('.');
 	std::string filename = out_file.substr(0, dot_pos);
 	std::string file_ext = out_file.substr(dot_pos);
@@ -100,13 +97,4 @@ void morph(char* src_file, char* dst_file, char* line_file, std::string out_file
 		std::cout << "\r" << f << "/" << frames;
 	}
 	std::cout << src.size() << " " << out.size() << endl;
-}
-
-int manin()
-{
-	morph("../../03.jpg", "../../04.jpg", "../../lines34.txt", "../../nwf/out.jpg");
-	int dong;
-	
-	std::cin >> dong;
-	return 0;
 }

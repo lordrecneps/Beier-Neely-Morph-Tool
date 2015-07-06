@@ -19,8 +19,8 @@ public:
 public slots:
 	void open_first()
 	{
-		QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("JPEG Files (*.jpg *.jpeg)"));
-		QImage *imgObj = new QImage(fileName);
+		img_file_1 = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("JPEG Files (*.jpg *.jpeg)"));
+		QImage *imgObj = new QImage(img_file_1);
 
 		if (!imgObj)
 			return;
@@ -32,8 +32,8 @@ public slots:
 
 	void open_second()
 	{
-		QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("JPEG Files (*.jpg *.jpeg)"));
-		QImage *imgObj = new QImage(fileName);
+		img_file_2 = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("JPEG Files (*.jpg *.jpeg)"));
+		QImage *imgObj = new QImage(img_file_2);
 
 		if (!imgObj)
 			return;
@@ -136,18 +136,17 @@ public slots:
 		ui.first_pic->remove_line(idx);
 		ui.second_pic->remove_line(idx);
 		delete ui.listWidget->currentItem();
-		//qDeleteAll( ui.listWidget->currentItem );
 	}
 
 	void start_morph()
 	{
-		morph("../../03.jpg", "../../04.jpg", "../../lines34.txt", "../../nwf/out.jpg");
+		morph(img_file_1.toStdString(), img_file_2.toStdString(), lp, out_file.toStdString(), ui.spinBox->value());
 	}
 
 	void set_output_file()
 	{
-		QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), "", tr("JPEG Files (*.jpg *.jpeg)"));
-		ui.lineEdit->setText(fileName);
+		out_file = QFileDialog::getSaveFileName(this, tr("Save File"), "", tr("JPEG Files (*.jpg *.jpeg)"));
+		ui.lineEdit->setText(out_file);
 	}
 
 private:
@@ -155,6 +154,8 @@ private:
 	int add_line_state;
 	bn::LinePairs lp;
 	bn::LinePair tp;
+
+	QString img_file_1, img_file_2, out_file;
 };
 
 #endif // BN_GUI_H

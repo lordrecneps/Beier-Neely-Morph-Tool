@@ -7,7 +7,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-void morph(char* src_file, char* dst_file, char* line_file, std::string out_file);
+void morph(const std::string& src_file, const std::string& dst_file, const bn::LinePairs& lines, const std::string& out_file, double frames);
 
 inline double bn_dist(const cv::Point2d& X, const cv::Point2d& XP, const cv::Point2d& Q, double u, double v)
 {
