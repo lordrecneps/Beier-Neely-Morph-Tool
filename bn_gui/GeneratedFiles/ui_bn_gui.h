@@ -29,6 +29,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "ClickableLabel.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -46,8 +47,8 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *first_pic;
-    QLabel *second_pic;
+    ClickableLabel *first_pic;
+    ClickableLabel *second_pic;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QLabel *label_3;
@@ -55,6 +56,7 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_3;
     QLineEdit *lineEdit;
+    QPushButton *pushButton_4;
     QPushButton *pushButton_2;
     QSpacerItem *horizontalSpacer_2;
     QListWidget *listWidget;
@@ -97,17 +99,24 @@ public:
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        first_pic = new QLabel(scrollAreaWidgetContents);
+        first_pic = new ClickableLabel(scrollAreaWidgetContents);
         first_pic->setObjectName(QStringLiteral("first_pic"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(first_pic->sizePolicy().hasHeightForWidth());
+        first_pic->setSizePolicy(sizePolicy);
         first_pic->setPixmap(QPixmap(QString::fromUtf8(":/bn_gui/metig2.jpg")));
-        first_pic->setScaledContents(true);
+        first_pic->setScaledContents(false);
 
         horizontalLayout_2->addWidget(first_pic);
 
-        second_pic = new QLabel(scrollAreaWidgetContents);
+        second_pic = new ClickableLabel(scrollAreaWidgetContents);
         second_pic->setObjectName(QStringLiteral("second_pic"));
+        sizePolicy.setHeightForWidth(second_pic->sizePolicy().hasHeightForWidth());
+        second_pic->setSizePolicy(sizePolicy);
         second_pic->setPixmap(QPixmap(QString::fromUtf8(":/bn_gui/tiger.jpg")));
-        second_pic->setScaledContents(true);
+        second_pic->setScaledContents(false);
 
         horizontalLayout_2->addWidget(second_pic);
 
@@ -145,8 +154,14 @@ public:
 
         lineEdit = new QLineEdit(centralWidget);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        lineEdit->setReadOnly(true);
 
         horizontalLayout->addWidget(lineEdit);
+
+        pushButton_4 = new QPushButton(centralWidget);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+
+        horizontalLayout->addWidget(pushButton_4);
 
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
@@ -162,6 +177,11 @@ public:
 
         listWidget = new QListWidget(centralWidget);
         listWidget->setObjectName(QStringLiteral("listWidget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(listWidget->sizePolicy().hasHeightForWidth());
+        listWidget->setSizePolicy(sizePolicy1);
 
         verticalLayout->addWidget(listWidget);
 
@@ -194,6 +214,11 @@ public:
         QObject::connect(pushButton_3, SIGNAL(clicked()), bn_guiClass, SLOT(remove_line()));
         QObject::connect(actionOpen_second_image, SIGNAL(triggered()), bn_guiClass, SLOT(open_second()));
         QObject::connect(actionOpen_first_image, SIGNAL(triggered()), bn_guiClass, SLOT(open_first()));
+        QObject::connect(pushButton_4, SIGNAL(clicked()), bn_guiClass, SLOT(set_output_file()));
+        QObject::connect(first_pic, SIGNAL(clicked(QPoint)), bn_guiClass, SLOT(first_image_clicked(QPoint)));
+        QObject::connect(actionOpen_Line_File, SIGNAL(triggered()), bn_guiClass, SLOT(load_lines()));
+        QObject::connect(second_pic, SIGNAL(clicked(QPoint)), bn_guiClass, SLOT(second_image_clicked(QPoint)));
+        QObject::connect(pushButton, SIGNAL(clicked()), bn_guiClass, SLOT(add_line()));
 
         QMetaObject::connectSlotsByName(bn_guiClass);
     } // setupUi
@@ -212,6 +237,7 @@ public:
         label_3->setText(QApplication::translate("bn_guiClass", "Frames:", 0));
         pushButton->setText(QApplication::translate("bn_guiClass", "Add Line", 0));
         pushButton_3->setText(QApplication::translate("bn_guiClass", "Remove Line", 0));
+        pushButton_4->setText(QApplication::translate("bn_guiClass", "...", 0));
         pushButton_2->setText(QApplication::translate("bn_guiClass", "Morph", 0));
         menuOpen->setTitle(QApplication::translate("bn_guiClass", "Open", 0));
         menuHelp->setTitle(QApplication::translate("bn_guiClass", "Help", 0));

@@ -13,13 +13,16 @@ namespace bn
 	struct LineSegment
 	{
 		public:
-			LineSegment(const cv::Point2d& p_, const cv::Point2d& q_) : p(p_), q(q_)
+			LineSegment(const cv::Point2d& p_ = cv::Point2d(), const cv::Point2d& q_ = cv::Point2d()) : p(p_), q(q_)
 			{
 				pq = q - p;
 				length = sqrt( pq.ddot(pq) );
 				pq /= length;
 				perp = cv::Point2d(pq.y, -pq.x);
 			}
+
+			LineSegment(double x1, double y1, double x2, double y2) : LineSegment(cv::Point2d(x1,y1), cv::Point2d(x2, y2)) {}
+			
 
 			static LineSegment interpolate(const LineSegment& l1, const LineSegment& l2, double t = 0.5)
 			{
@@ -36,8 +39,16 @@ namespace bn
 	struct LinePair
 	{
 		public:
-			LinePair(LineSegment l1_, LineSegment l2_) : l1(l1_), l2(l2_) { }
+			LinePair(LineSegment l1_ = LineSegment(), LineSegment l2_ = LineSegment()) : l1(l1_), l2(l2_) { }
 			LineSegment l1, l2;
+
+			friend std::ostream& operator<< (std::ostream &out, LinePair& lp)
+			{
+				out << "[(" << lp.l1.p.x << ", " << lp.l1.p.y << ") -> (" << lp.l1.q.x << ", " << lp.l1.q.y << ")] "
+					<< "[(" << lp.l2.p.x << ", " << lp.l2.p.y << ") -> (" << lp.l2.q.x << ", " << lp.l2.q.y << ")]";
+
+				return out;
+			}
 	};
 
 	class LinePairs
@@ -46,6 +57,12 @@ namespace bn
 			LinePairs() : line_pairs() {}
 			LinePairs(char* filename) : LinePairs()
 			{
+				load(filename);
+			}
+			
+			void load(char* filename)
+			{
+				line_pairs.clear();
 				std::ifstream file(filename);
 
 				if (!file.is_open())
@@ -63,9 +80,14 @@ namespace bn
 					file >> p1.x >> p1.y >> q1.x >> q1.y;
 					file >> p2.x >> p2.y >> q2.x >> q2.y;
 
-					LinePair lp(LineSegment(p1, q1), LineSegment(p2,q2));
+					LinePair lp(LineSegment(p1, q1), LineSegment(p2, q2));
 					line_pairs.push_back(lp);
 				}
+			}
+
+			void add_line(const LinePair& lp)
+			{
+				line_pairs.push_back(lp);
 			}
 
 			void print()

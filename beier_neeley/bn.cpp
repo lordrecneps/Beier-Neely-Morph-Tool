@@ -1,30 +1,15 @@
-#ifndef BEIER_NEELEY_CPP
-#define BEIER_NEELEY_CPP
-
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
-#include <cmath>
 #include <string>
 #include <sstream>
 #include "LineSegment.cpp"
+#include "bn.h"
 using namespace cv;
 using namespace std;
 
-inline double bn_dist(const Point2d& X, const Point2d& XP, const Point2d& Q, double u, double v)
-{
-	if (u < 0)
-		return sqrt(XP.ddot(XP));
 
-	if (u > 1)
-	{
-		Point2d XQ = X - Q;
-		return sqrt(XQ.ddot(XQ));
-	}
-
-	return abs(v);
-}
 
 void morph(char* src_file, char* dst_file, char* line_file, std::string out_file)
 {
@@ -125,5 +110,3 @@ int manin()
 	std::cin >> dong;
 	return 0;
 }
-
-#endif

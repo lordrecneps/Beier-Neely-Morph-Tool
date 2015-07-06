@@ -31,7 +31,13 @@
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="first_pic">
+         <widget class="ClickableLabel" name="first_pic">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -39,12 +45,18 @@
            <pixmap resource="bn_gui.qrc">:/bn_gui/metig2.jpg</pixmap>
           </property>
           <property name="scaledContents">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="second_pic">
+         <widget class="ClickableLabel" name="second_pic">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -52,7 +64,7 @@
            <pixmap resource="bn_gui.qrc">:/bn_gui/tiger.jpg</pixmap>
           </property>
           <property name="scaledContents">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -104,7 +116,18 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_2">
@@ -129,7 +152,14 @@
      </layout>
     </item>
     <item>
-     <widget class="QListWidget" name="listWidget"/>
+     <widget class="QListWidget" name="listWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -202,6 +232,16 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>ClickableLabel.h</header>
+   <slots>
+    <signal>clicked(QPoint)</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="bn_gui.qrc"/>
  </resources>
@@ -214,7 +254,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>454</x>
-     <y>444</y>
+     <y>641</y>
     </hint>
     <hint type="destinationlabel">
      <x>349</x>
@@ -254,10 +294,95 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>bn_guiClass</receiver>
+   <slot>set_output_file()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>734</x>
+     <y>641</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>-6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>first_pic</sender>
+   <signal>clicked(QPoint)</signal>
+   <receiver>bn_guiClass</receiver>
+   <slot>first_image_clicked(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>419</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionOpen_Line_File</sender>
+   <signal>triggered()</signal>
+   <receiver>bn_guiClass</receiver>
+   <slot>load_lines()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>second_pic</sender>
+   <signal>clicked(QPoint)</signal>
+   <receiver>bn_guiClass</receiver>
+   <slot>second_image_clicked(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1225</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>bn_guiClass</receiver>
+   <slot>add_line()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>351</x>
+     <y>646</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>open_first()</slot>
   <slot>open_second()</slot>
   <slot>remove_line()</slot>
+  <slot>set_output_file()</slot>
+  <slot>first_image_clicked(QPoint)</slot>
+  <slot>second_image_clicked(QPoint)</slot>
+  <slot>load_lines()</slot>
+  <slot>add_line()</slot>
  </slots>
 </ui>
