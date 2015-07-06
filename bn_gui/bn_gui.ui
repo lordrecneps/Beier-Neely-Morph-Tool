@@ -168,7 +168,7 @@
    </property>
    <widget class="QMenu" name="menuOpen">
     <property name="title">
-     <string>Open</string>
+     <string>File</string>
     </property>
     <addaction name="actionOpen_first_image"/>
     <addaction name="actionOpen_second_image"/>
@@ -311,8 +311,8 @@
    <slot>first_image_clicked(QPoint)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>419</x>
-     <y>434</y>
+     <x>391</x>
+     <y>340</y>
     </hint>
     <hint type="destinationlabel">
      <x>532</x>
@@ -343,8 +343,8 @@
    <slot>second_image_clicked(QPoint)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1225</x>
-     <y>434</y>
+     <x>742</x>
+     <y>340</y>
     </hint>
     <hint type="destinationlabel">
      <x>532</x>
@@ -384,6 +384,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>listWidget</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>bn_guiClass</receiver>
+   <slot>highlight_list(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>532</x>
+     <y>760</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>open_first()</slot>
@@ -395,5 +411,6 @@
   <slot>load_lines()</slot>
   <slot>add_line()</slot>
   <slot>start_morph()</slot>
+  <slot>highlight_list(int)</slot>
  </slots>
 </ui>

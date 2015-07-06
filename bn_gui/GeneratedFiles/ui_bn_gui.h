@@ -218,6 +218,7 @@ public:
         QObject::connect(second_pic, SIGNAL(clicked(QPoint)), bn_guiClass, SLOT(second_image_clicked(QPoint)));
         QObject::connect(pushButton, SIGNAL(clicked()), bn_guiClass, SLOT(add_line()));
         QObject::connect(pushButton_2, SIGNAL(clicked()), bn_guiClass, SLOT(start_morph()));
+        QObject::connect(listWidget, SIGNAL(currentRowChanged(int)), bn_guiClass, SLOT(highlight_list(int)));
 
         QMetaObject::connectSlotsByName(bn_guiClass);
     } // setupUi
@@ -238,7 +239,7 @@ public:
         pushButton_3->setText(QApplication::translate("bn_guiClass", "Remove Line", 0));
         pushButton_4->setText(QApplication::translate("bn_guiClass", "...", 0));
         pushButton_2->setText(QApplication::translate("bn_guiClass", "Morph", 0));
-        menuOpen->setTitle(QApplication::translate("bn_guiClass", "Open", 0));
+        menuOpen->setTitle(QApplication::translate("bn_guiClass", "File", 0));
         menuHelp->setTitle(QApplication::translate("bn_guiClass", "Help", 0));
     } // retranslateUi
 

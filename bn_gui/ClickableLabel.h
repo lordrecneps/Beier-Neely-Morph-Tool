@@ -2,6 +2,7 @@
 #include <vector>
 #include <LineSegment.cpp>
 #include <qpainter.h>
+#include "bn.h"
 
 class ClickableLabel : public QLabel
 {
@@ -9,7 +10,7 @@ class ClickableLabel : public QLabel
 public:
 	explicit ClickableLabel(const QString& text = "", QWidget* parent = 0);
 	explicit ClickableLabel(QWidget* parent) : ClickableLabel("", parent) {}
-	
+
 	~ClickableLabel();
 
 
@@ -21,6 +22,13 @@ public:
 
 		for (auto itr = lp.begin(); itr != lp.end(); ++itr)
 			painter.drawLine(itr->p.x, itr->p.y, itr->q.x, itr->q.y);
+
+		if (highlight_idx > -1)
+		{
+			bn::LineSegment ls = lp[highlight_idx];
+			painter.setPen(QPen(Qt::blue, 4, Qt::SolidLine, Qt::RoundCap));
+			painter.drawLine(ls.p.x, ls.p.y, ls.q.x, ls.q.y);
+		}
 
 		painter.setPen(QPen(Qt::yellow, 6, Qt::SolidLine, Qt::RoundCap));
 		for (auto itr = lp.begin(); itr != lp.end(); ++itr)
@@ -65,6 +73,29 @@ public:
 		update();
 	}
 
+	void enable_highlight(int idx)
+	{
+		highlight_idx = idx;
+		update();
+	}
+
+	void disable_highlight()
+	{
+		highlight_idx = -1;
+		update();
+	}
+
+	int closest_line(const QPoint& pos) const
+	{
+		for (unsigned int i = 0; i < lp.size(); ++i)
+		{
+			if (point_line_distance(lp[i].p, lp[i].q, cv::Point2d(pos.x(), pos.y())) < 4)
+				return i;
+		}
+
+		return -1;
+	}
+
 signals:
 	void clicked(const QPoint& pos);
 protected:
@@ -72,5 +103,6 @@ protected:
 private:
 	std::vector<bn::LineSegment> lp;
 	bool draw_point;
+	int highlight_idx;
 	QPoint point;
 };

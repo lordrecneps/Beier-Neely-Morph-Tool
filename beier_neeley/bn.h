@@ -23,4 +23,15 @@ inline double bn_dist(const cv::Point2d& X, const cv::Point2d& XP, const cv::Poi
 	return abs(v);
 }
 
+inline double point_line_distance(const cv::Point2d& P, const cv::Point2d& Q, const cv::Point2d& X)
+{
+	bn::LineSegment QP(P, Q);
+	cv::Point2d XP = X - P;
+
+	double u = XP.ddot(QP.pq) / QP.length;
+	double v = XP.ddot(QP.perp);
+
+	return bn_dist(X, XP, Q, u, v);
+}
+
 #endif

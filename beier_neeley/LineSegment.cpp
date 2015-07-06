@@ -15,10 +15,7 @@ namespace bn
 		public:
 			LineSegment(const cv::Point2d& p_ = cv::Point2d(), const cv::Point2d& q_ = cv::Point2d()) : p(p_), q(q_)
 			{
-				pq = q - p;
-				length = sqrt( pq.ddot(pq) );
-				pq /= length;
-				perp = cv::Point2d(pq.y, -pq.x);
+				init_vectors();
 			}
 
 			LineSegment(double x1, double y1, double x2, double y2) : LineSegment(cv::Point2d(x1,y1), cv::Point2d(x2, y2)) {}
@@ -29,6 +26,14 @@ namespace bn
 				cv::Point2d pp = (1 - t) * l1.p + t * l2.p;
 				cv::Point2d qq = (1 - t) * l1.q + t * l2.q;
 				return LineSegment(pp, qq);
+			}
+
+			void init_vectors()
+			{
+				pq = q - p;
+				length = sqrt(pq.ddot(pq));
+				pq /= length;
+				perp = cv::Point2d(pq.y, -pq.x);
 			}
 
 			cv::Point2d p, q;
