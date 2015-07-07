@@ -180,7 +180,6 @@
      <string>Help</string>
     </property>
     <addaction name="actionReadme"/>
-    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuOpen"/>
    <addaction name="menuHelp"/>
@@ -393,6 +392,22 @@
     <hint type="sourcelabel">
      <x>532</x>
      <y>760</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>bn_guiClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>532</x>

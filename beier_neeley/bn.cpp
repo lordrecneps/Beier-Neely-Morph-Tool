@@ -11,7 +11,7 @@ using namespace std;
 
 
 
-void morph(const std::string& src_file, const std::string& dst_file, const bn::LinePairs& lines, const std::string& out_file, double frames)
+void morph(const std::string& src_file, const std::string& dst_file, const bn::LinePairs& lines, const std::string& out_file, double frames, std::function<void(int)> prog_callback)
 {
 	Mat src, dst, mid1, mid2, out;
 	Mat map_x1, map_y1, map_x2, map_y2;
@@ -95,6 +95,8 @@ void morph(const std::string& src_file, const std::string& dst_file, const bn::L
 		file_ss << filename << f << file_ext;
 		cv::imwrite(file_ss.str(), out);
 		std::cout << "\r" << f << "/" << frames;
+
+		prog_callback(f);
 	}
-	std::cout << src.size() << " " << out.size() << endl;
+	
 }

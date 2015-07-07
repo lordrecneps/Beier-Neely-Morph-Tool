@@ -206,7 +206,6 @@ public:
         menuOpen->addAction(actionOpen_Line_File);
         menuOpen->addAction(actionExit);
         menuHelp->addAction(actionReadme);
-        menuHelp->addAction(actionAbout);
 
         retranslateUi(bn_guiClass);
         QObject::connect(pushButton_3, SIGNAL(clicked()), bn_guiClass, SLOT(remove_line()));
@@ -219,6 +218,7 @@ public:
         QObject::connect(pushButton, SIGNAL(clicked()), bn_guiClass, SLOT(add_line()));
         QObject::connect(pushButton_2, SIGNAL(clicked()), bn_guiClass, SLOT(start_morph()));
         QObject::connect(listWidget, SIGNAL(currentRowChanged(int)), bn_guiClass, SLOT(highlight_list(int)));
+        QObject::connect(actionExit, SIGNAL(triggered()), bn_guiClass, SLOT(close()));
 
         QMetaObject::connectSlotsByName(bn_guiClass);
     } // setupUi

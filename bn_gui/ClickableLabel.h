@@ -50,6 +50,8 @@ public:
 	void remove_line(int idx)
 	{
 		lp.erase(lp.begin() + idx);
+		if (highlight_idx >= lp.size())
+			highlight_idx = -1;
 		update();
 	}
 

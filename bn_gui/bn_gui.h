@@ -6,6 +6,7 @@
 #include <iostream>
 #include <qfiledialog.h>
 #include <qmessagebox.h>
+#include <qprogressdialog.h>
 #include "bn.h"
 #include <sstream>
 
@@ -21,12 +22,12 @@ public slots:
 	void open_first()
 	{
 		img_file_1 = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("JPEG Files (*.jpg *.jpeg)"));
-		QImage *imgObj = new QImage(img_file_1);
+		QImage imgObj(img_file_1);
 
-		if (!imgObj)
+		if (imgObj.isNull())
 			return;
 
-		QPixmap img = QPixmap::fromImage(*imgObj);
+		QPixmap img = QPixmap::fromImage(imgObj);
 
 		ui.first_pic->setPixmap(img);
 	}
@@ -34,12 +35,12 @@ public slots:
 	void open_second()
 	{
 		img_file_2 = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("JPEG Files (*.jpg *.jpeg)"));
-		QImage *imgObj = new QImage(img_file_2);
+		QImage imgObj(img_file_2);
 
-		if (!imgObj)
+		if (imgObj.isNull())
 			return;
 
-		QPixmap img = QPixmap::fromImage(*imgObj);
+		QPixmap img = QPixmap::fromImage(imgObj);
 
 		ui.second_pic->setPixmap(img);
 	}
@@ -197,13 +198,11 @@ public slots:
 			return;
 		}
 
-		std::stringstream blaMsg;
-		for (auto itr = lp.line_pairs.begin(); itr != lp.line_pairs.end(); ++itr)
-			blaMsg << *itr << std::endl;
-		msgBox.setText(QString::fromStdString(blaMsg.str()));
-		msgBox.exec();
+		int frames = ui.spinBox->value();
+		QProgressDialog progress("Performing morph...", QString(), 0, frames + 1, this);
+		progress.setWindowModality(Qt::WindowModal);
 
-		morph(img_file_1.toStdString(), img_file_2.toStdString(), lp, out_file.toStdString(), ui.spinBox->value());
+		morph(img_file_1.toStdString(), img_file_2.toStdString(), lp, out_file.toStdString(), frames, [&progress](int val) {progress.setValue(val); });
 	}
 
 	void set_output_file()
